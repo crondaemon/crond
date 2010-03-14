@@ -16,8 +16,11 @@ end
 @bagno = Room.new("bagno", "Un bagno con le piastrelle azzurre.")
 @salone = Room.new("salone", "Un grosso salone")
 @cucina = Room.new("cucina", "Una cucina dalle piastrelle gialle e un tavolo al centro.")
-@giardino = Room.new("giardino", "Un giardino abbandonato")
 @scala = Room.new("scala", "Una scala di legno.")
+@giardino = Room.new("giardino", "Un giardino abbandonato.")
+
+# Override of the description of "giardino"
+@giardino.desc = "Un giardino abbandonato.\nSono le #{Time.new.hour}, il giardino e' #{Time.new.hour.between?(8,20) ? 'luminoso' : 'oscuro'}."
 
 @ingresso.connect(@bagno)
 @ingresso.connect(@salone)
@@ -37,3 +40,4 @@ def start
     @me.set_pos(@ingresso)
 end
 
+puts "Digita start per iniziare a giocare"
