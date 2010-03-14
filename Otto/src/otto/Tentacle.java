@@ -3,12 +3,10 @@
  * and open the template in the editor.
  */
 
-package otto2;
+package otto;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -32,7 +30,9 @@ public class Tentacle extends Thread implements Runnable {
     public void run() {
         //System.out.println("Tentacle " + _host + "/" + _port);
         try {
-            Socket s = new Socket(_host, _port);
+            Socket s = new Socket();
+            s.connect(new InetSocketAddress(_host, _port), 10);
+            //s.connect(_host, _port);
             _open = true;
             s.close();
         } catch (IOException ex) {
