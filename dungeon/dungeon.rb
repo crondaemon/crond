@@ -20,7 +20,7 @@ end
 @giardino = Room.new("giardino", "Un giardino abbandonato.")
 
 # Override of the description of "giardino"
-@giardino.desc = "Un giardino abbandonato.\nSono le #{Time.new.hour}, il giardino e' #{Time.new.hour.between?(8,20) ? 'luminoso' : 'oscuro'}."
+@giardino.desc << "\nSono le #{Time.new.hour}, il giardino e' #{Time.new.hour.between?(8,20) ? 'luminoso' : 'oscuro'}."
 
 @ingresso.connect(@bagno)
 @ingresso.connect(@salone)
