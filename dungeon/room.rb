@@ -1,6 +1,6 @@
 
 class Room
-    attr :desc
+    attr_accessor :desc
     attr_reader :name
     attr :exits
     attr :players
