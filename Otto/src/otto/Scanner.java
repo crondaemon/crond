@@ -8,7 +8,6 @@ package otto;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +20,6 @@ public class Scanner extends Thread implements Runnable {
     private int _toPort;
     private String _host;
     private int _timeout;
-    private javax.swing.JProgressBar _bar;
     private boolean _finish;
     private MainFrame _caller;
 
@@ -69,6 +67,9 @@ public class Scanner extends Thread implements Runnable {
             v = (i - _fromPort) * 100 / (_toPort - _fromPort);
             _caller.setBar(v);
         }
+
+        if (_finish == true)
+            System.out.println("Scanner stop requested.");
     }
 
     public void finish() {
