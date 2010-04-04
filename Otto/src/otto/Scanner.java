@@ -48,9 +48,7 @@ public class Scanner extends Thread implements Runnable {
             Socket s = new Socket();
             // Try to connect to port
             try {
-                //System.out.println("Scanning port " + i);
                 s.connect(new InetSocketAddress(_host, i), _timeout);
-                //System.out.println("Port " + i + " is open.");
                 _caller.addPort(i);
             }
             catch (Exception e) {
@@ -66,6 +64,7 @@ public class Scanner extends Thread implements Runnable {
 
             v = (i - _fromPort) * 100 / (_toPort - _fromPort);
             _caller.setBar(v);
+            _caller.validate();
         }
 
         if (_finish == true)
