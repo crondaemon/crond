@@ -2,6 +2,7 @@
 require 'rubygems'
 require 'hpricot'
 require 'open-uri'
+require 'cgi'
 
 start = 'http://www.facebook.com/barbara.bettetini'
 load_delay = 5
@@ -30,7 +31,13 @@ url_list.each do |u|
     
     friends.each do |f|
         #puts "\"#{this_user}\" -- \"#{f[:title]}\""
-        file.write("\"#{this_user}\" -- \"#{f[:title]}\";\n")
+        user1 = CGI::unescapeHTML(this_user)
+        user2 = f[:title]
+        if (user1 < user2)
+            file.write("\"#{user1}\" -- \"#{user2}\";\n")
+        else
+            file.write("\"#{user2}\" -- \"#{user1}\";\n")
+        end
         file.flush
         url_list << f[:href]
     end
