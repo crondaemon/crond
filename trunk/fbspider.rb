@@ -4,9 +4,9 @@ require 'hpricot'
 require 'open-uri'
 require 'cgi'
 
-start = 'http://www.facebook.com/barbara.bettetini'
-load_delay = 5
-outfile = 'bettetini.dot'
+start = 'http://www.facebook.com/XinFeiTorino'
+load_delay = 0
+outfile = 'xinfei.dot'
 
 url_list = Array.new
 url_list << start
@@ -14,6 +14,8 @@ url_list << start
 file = File.new(outfile, "w")
 
 file.write("graph {\n")
+
+graphlines = Array.new
 
 url_list.each do |u|
     
@@ -31,18 +33,24 @@ url_list.each do |u|
     
     friends.each do |f|
         #puts "\"#{this_user}\" -- \"#{f[:title]}\""
-        user1 = CGI::unescapeHTML(this_user)
-        user2 = f[:title]
-        if (user1 < user2)
-            file.write("\"#{user1}\" -- \"#{user2}\";\n")
-        else
-            file.write("\"#{user2}\" -- \"#{user1}\";\n")
-        end
-        file.flush
-        url_list << f[:href]
-    end
+        tu = CGI::unescapeHTML(this_user)
+        tit = f[:title]
+        
+        user1 = (tu < tit ? tu : tit)
+        user2 = (tu < tit ? tit : tu)
+        
+        line = "\"#{user1}\" -- \"#{user2}\";\n"
 
-    sleep load_delay
+        if !graphlines.include?(line)
+            graphlines << line
+            file.write(line)
+            file.flush
+        end
+                
+        url_list << f[:href]
+   end
+
+   sleep load_delay
 end
 
 
