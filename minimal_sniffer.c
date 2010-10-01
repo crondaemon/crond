@@ -1,5 +1,6 @@
 #include <pcap.h>
 #include <stdio.h>
+#include <arpa/inet.h>
 
 void packet_process(u_char *args, const struct pcap_pkthdr *header,
 	    const u_char *packet)
@@ -15,21 +16,23 @@ void packet_process(u_char *args, const struct pcap_pkthdr *header,
 
 int main(int argc, char *argv[])
 {
-    pcap_t *handle;                 // Session handle
-    char *dev;                      // The device to sniff on
-    char errbuf[PCAP_ERRBUF_SIZE];  // Error string 
-    struct bpf_program fp;          // The compiled filter 
-    char filter_exp[] = "ip";       // The filter expression 
-    bpf_u_int32 mask;               // Our netmask 
-    bpf_u_int32 net;                // Our IP 
+    pcap_t *handle;                // Session handle
+    char *dev;                     // The device to sniff on
+    char errbuf[PCAP_ERRBUF_SIZE]; // Error string 
+    struct bpf_program fp;         // The compiled filter 
+    char filter_exp[] = "ip";      // The filter expression 
+    bpf_u_int32 mask;              // Our netmask 
+    bpf_u_int32 net;               // Our IP
+    char bufnet[20];               // Print buffer
+    char bufmask[20];              // Print buffer
 
-    // Define the device 
+    // Get the first available device 
     dev = pcap_lookupdev(errbuf);
     if (dev == NULL) {
         fprintf(stderr, "Couldn't find default device: %s\n", errbuf);
         return(2);
     } else {
-        printf("Minimal sniffer running on device %s\n", dev);
+        printf("\nMinimal sniffer running on device %s\n\n", dev);
     }
     
     // Find the properties for the device 
@@ -37,7 +40,13 @@ int main(int argc, char *argv[])
 	    fprintf(stderr, "Couldn't get netmask for device %s: %s\n", dev, errbuf);
 	    net = 0;
 	    mask = 0;
+    } else {
+        printf("Device ip: %s/%s\n\n", inet_ntop(AF_INET, &net, bufnet, 20),
+            inet_ntop(AF_INET, &mask, bufmask, 20));
     }
+    
+    printf("Press ENTER to start sniffing.");
+    getchar();
     
     // Open the session in promiscuous mode 
     handle = pcap_open_live(dev, BUFSIZ, 1, 1000, errbuf);
