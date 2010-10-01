@@ -15,13 +15,13 @@ void packet_process(u_char *args, const struct pcap_pkthdr *header,
 
 int main(int argc, char *argv[])
 {
-    pcap_t *handle;			        // Session handle
-    char *dev;			            // The device to sniff on
-    char errbuf[PCAP_ERRBUF_SIZE];	// Error string 
-    struct bpf_program fp;		    // The compiled filter 
+    pcap_t *handle;                 // Session handle
+    char *dev;                      // The device to sniff on
+    char errbuf[PCAP_ERRBUF_SIZE];  // Error string 
+    struct bpf_program fp;          // The compiled filter 
     char filter_exp[] = "ip";       // The filter expression 
-    bpf_u_int32 mask;		        // Our netmask 
-    bpf_u_int32 net;		        // Our IP 
+    bpf_u_int32 mask;               // Our netmask 
+    bpf_u_int32 net;                // Our IP 
 
     // Define the device 
     dev = pcap_lookupdev(errbuf);
