@@ -1,15 +1,46 @@
-#include <pcap.h>
+/*
+
+    Minimal sniffer written by Dario Lombardo
+    
+    This an educational purpose sniffer written for the Linux Day Torino 2010
+    that demonstrates how the skeleton of a pcap-based sniffer is.
+
+    Compile with
+    gcc minimal_sniffer.c -o minimal_sniffer -lpcap
+    
+    Requires root privileges to run.
+
+    It sniffs from the first available device and applies the "ip" pcap filter.
+        
+*/
+
 #include <stdio.h>
+#include <pcap.h>
 #include <arpa/inet.h>
+#include <netinet/ip.h>
 
 void packet_process(u_char *args, const struct pcap_pkthdr *header,
 	    const u_char *packet)
 {
-    // Print the IP header
     unsigned i;
-    printf("Packet of size %4u -> ", header->len);
+    struct iphdr* iph;
+    char ip_from[20];
+    char ip_to[20];
+
+    // skip 14 bytes (ethernet)
+    iph = (struct iphdr*)(packet + 14);
+    
+    printf("Size %4u: %s -> %s", header->len, 
+        inet_ntop(AF_INET, &iph->saddr, ip_from, 20),
+        inet_ntop(AF_INET, &iph->daddr, ip_to, 20));
+    
+    #ifdef DUMP_PACKET
+    printf(" [");
     for (i = 0; i < 20; i++)
         printf("%.2X:", packet[i + 14]);
+    printf("]");
+    #endif
+    
     printf("\n");
 }
 
