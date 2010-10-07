@@ -69,4 +69,8 @@ class Room
             o.actions
         end
     end
+    
+    def can_go_out?
+        return true
+    end
 end

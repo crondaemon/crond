@@ -12,6 +12,7 @@ class Object
   end
 end 
 
+
 @ingresso = Room.new("ingresso", "Un ingresso spoglio")
 @bagno = Room.new("bagno", "Un bagno con le piastrelle azzurre.")
 @salone = Room.new("salone", "Un grosso salone")
@@ -28,16 +29,27 @@ end
 @salone.connect(@cucina)
 @cucina.connect(@giardino)
 
+# Room constraints
+@giardino.instance_variable_set("@broken", false)
+def @giardino.can_go_out?
+    if @broken
+        puts "La porta e' stata scardinata"
+        return true
+    end
+    
+    puts "La porta ti si e' chiusa alle spalle e ora non puoi rientrare"
+    return false
+end
+
+# Objects
 @campanello = Ringer.new("campanello", "Un campanello da bici")
 @ingresso.objs << @campanello
+@banana = Banana.new("banana", "Una buccia di banana")
+@giardino.objs << @banana
 
-# Environment commands
-
-def start
-    print "Inserire il nome del giocatore: "
-    pname = gets.chomp
-    @me = Player.new(pname)
-    @me.set_pos(@ingresso)
-end
+print "Inserire il nome del giocatore: "
+pname = gets.chomp
+@me = Player.new(pname)
+@me.set_pos(@ingresso)
 
 puts "Digita start per iniziare a giocare"
