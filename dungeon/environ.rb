@@ -6,7 +6,9 @@ def go(room = nil)
         return
     end
     if @me.position.exits.include?(room)
-        @me.set_pos(room)
+        if @me.position.can_go_out?
+            @me.set_pos(room)
+        end
     else
         puts "Uscita inesistente (#{roomname})"
     end
@@ -25,9 +27,15 @@ def look(obj = nil)
     
     if @me.position.objs.include?(obj)
         obj.show
-    else
-        #puts "Oggetto non presente (#{obj.name})"
+        return
     end
+    
+    if @me.objs.include?(obj)
+        obj.show
+        return
+    end
+    
+    puts "Non vedo nessun oggetto #{obj.name}"
 end
 
 def helpme
@@ -36,6 +44,8 @@ def helpme
     puts "show - mostra la stanza corrente"
     puts "look <oggetto> - esamina un oggetto"
     puts "use <oggetto> - usa un oggetto"
+    puts "pick <oggetto> - raccogli un oggetto"
+    puts "drop <oggetto> - lascia un ggetto"
 end
 
 def use(obj = nil)

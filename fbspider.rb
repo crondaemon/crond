@@ -5,9 +5,9 @@ require 'open-uri'
 require 'cgi'
 
 start = 'http://www.facebook.com/XinFeiTorino'
-load_delay = 0
-max_depth = 2
+load_delay = 2
 outfile = 'xinfei.dot'
+max_depth = 2
 
 url_list = Array.new
 url_list << { :url => start, :depth => 0 }
@@ -21,7 +21,10 @@ graphlines = Array.new
 puts "\n\nSpider starts from #{start} building web up to #{max_depth} levels\n\n"
 
 url_list.each do |elem|
-    
+
+    u = url_list.first
+    url_list.delete_at(0)
+
     if elem[:depth] > max_depth
         file.write("}\n")
         exit
@@ -37,8 +40,6 @@ url_list.each do |elem|
         'Gecko/20100330 Fedora/3.5.9-2.fc12 Firefox/3.5.9').read)
 
     this_user = doc.search("//title").inner_html.split('|')[0].chop
-
-    url_list.delete(u)
 
     friends = doc.search("//div[@class='UIPortrait_Text']/a")
     
@@ -59,7 +60,7 @@ url_list.each do |elem|
         else
             puts "Duplicate found!"
         end
-                
+
         url_list << { :url => f[:href], :depth => elem[:depth]+1 }
    end
 
@@ -80,3 +81,4 @@ end
 
 # home = $agent.submit(loginf, loginf.buttons.first)
 
+# http://www.facebook.com/friends/?id=barbara.bettetini

@@ -45,19 +45,64 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="progressBar" alignment="1" pref="714" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
+<<<<<<< .mine
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="label4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+=======
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" pref="130" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+>>>>>>> .r9
                       <Group type="103" groupAlignment="1" attributes="0">
+<<<<<<< .mine
+                          <Component id="jScrollPane1" alignment="0" pref="373" max="32767" attributes="0"/>
+                          <Component id="progressBar" alignment="0" pref="373" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="label5" min="-2" max="-2" attributes="1"/>
+                                          <Component id="label3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="label2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="label1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="timeoutTextField" max="32767" attributes="1"/>
+                                          <Component id="toTextField" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="hostTextField" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="fromTextField" alignment="0" min="-2" pref="217" max="-2" attributes="1"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="1">
+                                      <EmptySpace min="236" pref="236" max="236" attributes="0"/>
+                                      <Component id="scanButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="allPortCheck" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+=======
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="label5" min="-2" max="-2" attributes="1"/>
                               <Component id="label1" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="label2" min="-2" max="-2" attributes="0"/>
                           <Component id="label3" min="-2" max="-2" attributes="0"/>
+>>>>>>> .r9
                       </Group>
+<<<<<<< .mine
+                      <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
+=======
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="toTextField" pref="414" max="32767" attributes="1"/>
@@ -65,38 +110,123 @@
                           <Component id="hostTextField" alignment="0" pref="414" max="32767" attributes="1"/>
                           <Component id="timeoutTextField" alignment="0" pref="414" max="32767" attributes="1"/>
                       </Group>
+>>>>>>> .r8
                   </Group>
+<<<<<<< .mine
+=======
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="scanButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   </Group>
+>>>>>>> .r9
               </Group>
+<<<<<<< .mine
+<<<<<<< .mine
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+=======
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+=======
               <EmptySpace max="-2" attributes="0"/>
+>>>>>>> .r9
               <Component id="allPortCheckBox" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <Component id="jScrollPane1" pref="702" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+>>>>>>> .r8
           </Group>
+<<<<<<< .mine
+=======
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="317" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="327" max="32767" attributes="0"/>
           </Group>
+>>>>>>> .r9
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+<<<<<<< .mine
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="hostTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="label1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="fromTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="label2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="toTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="label3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="allPortCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="timeoutTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="label5" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< .mine
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+=======
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+>>>>>>> .r8
+<<<<<<< .mine
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="scanButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+=======
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="hostTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="label1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="fromTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="label2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="toTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="label3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="timeoutTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="label5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="scanButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+=======
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="timeoutTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="label5" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> .r9
                       </Group>
+<<<<<<< .mine
+>>>>>>> .r8
+                      <EmptySpace max="-2" attributes="0"/>
+=======
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="label1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -118,14 +248,36 @@
                           <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="scanButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+>>>>>>> .r9
                   </Group>
+<<<<<<< .mine
+<<<<<<< .mine
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="24" max="32767" attributes="0"/>
+                      <Component id="label4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+=======
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                      <Component id="allPortCheckBox" min="-2" max="-2" attributes="0"/>
+                  </Group>
+=======
                   <Component id="jLabel2" min="-2" pref="141" max="-2" attributes="0"/>
+>>>>>>> .r9
+>>>>>>> .r8
               </Group>
+<<<<<<< .mine
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="88" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+=======
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="186" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+>>>>>>> .r9
               <Component id="progressBar" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -178,6 +330,11 @@
         <Property name="text" type="java.lang.String" value="to port"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JLabel" name="label4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Scan results"/>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JLabel" name="label5">
       <Properties>
         <Property name="text" type="java.lang.String" value="timeout (msec)"/>
@@ -208,10 +365,13 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JCheckBox" name="allPortCheck">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Scan results"/>
+        <Property name="text" type="java.lang.String" value="All"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="allPortCheckActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="allPortCheckBox">
       <Properties>

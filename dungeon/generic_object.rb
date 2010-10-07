@@ -15,6 +15,7 @@ class GenericObject
     end
     
     def use
+        puts "Questo oggetto non ha un uso particolare"
     end
 end
 
@@ -36,3 +37,8 @@ class Ringer < GenericObject
     end
 end
 
+class Banana < GenericObject
+    def actions
+        puts "Appena entri metti il piede su una buccia di banana e scivoli"
+    end
+end
