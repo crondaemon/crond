@@ -5,12 +5,17 @@ if [ "$2" == "" ];then
     exit 1
 fi
 
+if [ `id -u` != 0 ];then
+    echo "Root privileges required"
+    exit 2
+fi
+
 #DEV=`tty`
 DEV=/dev/null
 
 DELAY=5
-
 OUTFILE=results_$1_$2.txt
+NETDEV=eth1
 
 if [ -f $OUTFILE ];then
     echo "Output file $OUTFILE exists. Exiting."
@@ -25,14 +30,14 @@ slower() {
     echo " "
 }
 
-echo -n "Starting radar"
-tcpdump -l -nn -i eth0 -w radar.pcap udp src port 53 >& $DEV &
+echo -n "Starting radar on $NETDEV"
+tcpdump -l -nn -i $NETDEV -w radar.pcap udp src port 53 >& $DEV &
 RADAR_PID=$!
 slower 5
 echo "Radar started with pid $RADAR_PID"
 
 echo "Starting scanner"
-./scan_dns $1 $2
+./scan_dns $1 $2 1000
 echo "Scanner finished"
 
 echo "Waiting slow scan packets"

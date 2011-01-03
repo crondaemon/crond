@@ -11,6 +11,7 @@
 #include <syslog.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <time.h>
 
 const char* dns_payload = "\x0a\x25\x01\x00\x00\x01\x00\x00\x00\x00\x00\x00\x03"
     "\x77\x77\x77\x05\x63\x69\x73\x63\x6f\x03\x63\x6f\x6d\x00\x00\x01\x00\x01\x00";
@@ -24,15 +25,23 @@ int main(int argc, char* argv[])
     int sockfd;
     struct sockaddr_in servaddr;
     uint32_t i;
-    unsigned delay = 0;
+    struct timespec delay;
+    struct timespec rem;
     
     if (argc < 3) {
-        printf("Usage: %s <ip from> <ip to> [delay]\n", argv[0]);
+        printf("Usage: %s <ip from> <ip to> [sec delay] [nsec delay]\n", argv[0]);
         return 1;
     }
     
     if (argc == 4)
-        delay = atoi(argv[3]);
+        delay.tv_sec = atoi(argv[3]);
+    else
+        delay.tv_sec = 0;
+        
+    if (argc == 5)
+        delay.tv_nsec = atoi(argv[4]);
+    else
+        delay.tv_nsec = 0;
 
     ip_from = ntohl(inet_addr(argv[1]));
     ip_to = ntohl(inet_addr(argv[2]));
@@ -59,8 +68,13 @@ int main(int argc, char* argv[])
                     return 3;
             }
         }
+
+        #ifndef MAXSPEED        
+        if ((i - ip_from) % ((ip_to - ip_from)/10) == 0)
+            printf("Progress: %u%%\n", (i - ip_from)/((ip_to - ip_from)/10));
         
-        usleep(delay);
+        nanosleep(&delay, &rem);
+        #endif
     }
     
     //syslog(LOG_INFO, "Ending scan %s -> %s", argv[1], argv[2]);
