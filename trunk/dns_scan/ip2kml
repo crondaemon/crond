@@ -1,0 +1,35 @@
+#!/bin/bash
+
+if [ "$2" == "" ];then
+    echo "Usage: $0 <ip file> <kml file>"
+    exit 1
+fi
+
+if [ ! -f GeoLiteCity.dat ];then
+    echo "Can't find GeoLiteCity.dat. Exiting."
+    exit 2
+fi
+
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<kml xmlns=\"http://www.opengis.net/kml/2.2\">
+<Document>
+<name>DNS Open relay servers</name>
+<description>Locations of DNS open relay servers based on GeoIP database</description>" > $2
+
+for ip in `cat $1`
+do
+    LOC=`geoiplookup -f GeoLiteCity.dat $ip | awk ' BEGIN { FS="," } { print $7 "," $6 } '`
+    echo "Processing $ip -> $LOC"
+    echo "<Placemark>
+    <name>$ip</name>
+    <description>None</description>
+    <Point>
+      <coordinates>$LOC,0</coordinates>
+    </Point>
+  </Placemark>" >> $2
+done
+
+echo "</Document>
+</kml>" >> $2
+
+
