@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <syslog.h>
 #include <errno.h>
+#include <stdlib.h>
 
 const char* dns_payload = "\x0a\x25\x01\x00\x00\x01\x00\x00\x00\x00\x00\x00\x03"
     "\x77\x77\x77\x05\x63\x69\x73\x63\x6f\x03\x63\x6f\x6d\x00\x00\x01\x00\x01\x00";
@@ -23,14 +24,16 @@ int main(int argc, char* argv[])
     int sockfd;
     struct sockaddr_in servaddr;
     uint32_t i;
+    unsigned delay = 0;
     
-    if (argc != 3) {
-        printf("Usage: %s <ip from> <ip to>\n", argv[0]);
+    if (argc < 3) {
+        printf("Usage: %s <ip from> <ip to> [delay]\n", argv[0]);
         return 1;
     }
     
-    syslog(LOG_INFO, "Starting scan %s -> %s", argv[1], argv[2]);
-    
+    if (argc == 4)
+        delay = atoi(argv[3]);
+
     ip_from = ntohl(inet_addr(argv[1]));
     ip_to = ntohl(inet_addr(argv[2]));
 
@@ -56,9 +59,11 @@ int main(int argc, char* argv[])
                     return 3;
             }
         }
+        
+        usleep(delay);
     }
     
-    syslog(LOG_INFO, "Ending scan %s -> %s", argv[1], argv[2]);
+    //syslog(LOG_INFO, "Ending scan %s -> %s", argv[1], argv[2]);
     
     return 0;
 }

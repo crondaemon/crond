@@ -10,8 +10,15 @@ DEV=/dev/null
 
 DELAY=5
 
+OUTFILE=results_$1_$2.txt
+
+if [ -f $OUTFILE ];then
+    echo "Output file $OUTFILE exists. Exiting."
+    exit 2
+fi
+
 slower() {
-    for (( i = 0 ; i < $DELAY; i++ )) do
+    for (( i = 0 ; i < $1; i++ )) do
         sleep 1
         echo -n "."
     done
@@ -21,20 +28,21 @@ slower() {
 echo -n "Starting radar"
 tcpdump -l -nn -i eth0 -w radar.pcap udp src port 53 >& $DEV &
 RADAR_PID=$!
-slower
+slower 5
 echo "Radar started with pid $RADAR_PID"
 
-echo -n "Starting scanner"
+echo "Starting scanner"
 ./scan_dns $1 $2
-slower
 echo "Scanner finished"
 
+echo "Waiting slow scan packets"
+slower 30
 echo -n "Stopping radar"
 kill -15 $RADAR_PID
-slower
+slower 5
 
 echo "Parsing results"
-tshark -r radar.pcap -l -nn 2> $DEV | awk ' { print $3 } ' | sort -u
-
-echo "Removing radar file"
+tshark -r radar.pcap -l -nn 2> $DEV | awk ' { print $3 } ' | sort -u > $OUTFILE
 rm -rf radar.pcap
+
+echo "Output is in file $OUTFILE"
