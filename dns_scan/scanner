@@ -1,0 +1,40 @@
+#!/bin/bash
+
+if [ "$2" == "" ];then
+    echo "Usage: $0 <ip from> <ip to>"
+    exit 1
+fi
+
+#DEV=`tty`
+DEV=/dev/null
+
+DELAY=5
+
+slower() {
+    for (( i = 0 ; i < $DELAY; i++ )) do
+        sleep 1
+        echo -n "."
+    done
+    echo " "
+}
+
+echo -n "Starting radar"
+tcpdump -l -nn -i eth0 -w radar.pcap udp src port 53 >& $DEV &
+RADAR_PID=$!
+slower
+echo "Radar started with pid $RADAR_PID"
+
+echo -n "Starting scanner"
+./scan_dns $1 $2
+slower
+echo "Scanner finished"
+
+echo -n "Stopping radar"
+kill -15 $RADAR_PID
+slower
+
+echo "Parsing results"
+tshark -r radar.pcap -l -nn 2> $DEV | awk ' { print $3 } ' | sort -u
+
+echo "Removing radar file"
+rm -rf radar.pcap
