@@ -31,7 +31,7 @@ slower() {
 }
 
 echo -n "Starting radar on $NETDEV"
-tcpdump -l -nn -i $NETDEV -w radar.pcap udp src port 53 >& $DEV &
+tcpdump -l -nn -i $NETDEV -w radar_$1_$2.pcap udp src port 53 >& $DEV &
 RADAR_PID=$!
 slower 5
 echo "Radar started with pid $RADAR_PID"
@@ -47,7 +47,7 @@ kill -15 $RADAR_PID
 slower 5
 
 echo "Parsing results"
-tshark -r radar.pcap -l -nn 2> $DEV | awk ' { print $3 } ' | sort -u > $OUTFILE
+tshark -r radar_$1_$2.pcap -l -nn 2> $DEV | awk ' { print $3 } ' | sort -u > $OUTFILE
 rm -rf radar.pcap
 
 echo "Output is in file $OUTFILE"

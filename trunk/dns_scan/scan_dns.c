@@ -13,10 +13,10 @@
 #include <stdlib.h>
 #include <time.h>
 
-const char* dns_payload = "\x0a\x25\x01\x00\x00\x01\x00\x00\x00\x00\x00\x00\x03"
-    "\x77\x77\x77\x05\x63\x69\x73\x63\x6f\x03\x63\x6f\x6d\x00\x00\x01\x00\x01\x00";
+const char* dns_payload = "\x73\xe3\x01\x00\x00\x01\x00\x00\x00\x00\x00\x00"
+    "\x03\x77\x77\x77\x05\x70\x69\x70\x70\x6f\x02\x69\x74\x00\x00\x01\x00\x01";
     
-const unsigned dns_payload_size = 31;
+const unsigned dns_payload_size = 30;
 
 int main(int argc, char* argv[])
 {
@@ -75,6 +75,7 @@ int main(int argc, char* argv[])
         
         nanosleep(&delay, &rem);
         #endif
+        
     }
     
     //syslog(LOG_INFO, "Ending scan %s -> %s", argv[1], argv[2]);
