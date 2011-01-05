@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
 
     printf("Progress: XXX");
     fflush(NULL);
-    for (i = ip_from; i < ip_to; i++) {
+    for (i = ip_from; i <= ip_to; i++) {
         servaddr.sin_addr.s_addr = htonl(i);
         if (sendto(sockfd, dns_payload, dns_payload_size, 0, (struct sockaddr*)&servaddr, 
                 sizeof(servaddr)) == -1) {

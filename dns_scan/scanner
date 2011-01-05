@@ -14,12 +14,18 @@ fi
 DEV=/dev/null
 
 DELAY=5
-OUTFILE=results_$1_$2.txt
-NETDEV=eth1
+OUTFILE=results/results_$1_$2.txt
+NETDEV=eth0
+
+ifconfig $NETDEV >& $DEV
+if [ $? != 0 ];then
+    echo "Interface $NETDEV is not present"
+    exit 3
+fi
 
 if [ -f $OUTFILE ];then
     echo "Output file $OUTFILE exists. Exiting."
-    exit 2
+    exit 4
 fi
 
 slower() {
@@ -30,14 +36,17 @@ slower() {
     echo " "
 }
 
+mkdir -p radar
+mkdir -p results
+
 echo -n "Starting radar on $NETDEV"
-tcpdump -l -nn -i $NETDEV -w radar_$1_$2.pcap udp src port 53 >& $DEV &
+tcpdump -l -nn -i $NETDEV -w radar/radar_$1_$2.pcap udp src port 53 >& $DEV &
 RADAR_PID=$!
 slower 5
 echo "Radar started with pid $RADAR_PID"
 
 echo "Starting scanner"
-./scan_dns $1 $2 1000
+./scan_dns $1 $2
 echo "Scanner finished"
 
 echo -n "Waiting slow scan packets"
@@ -47,7 +56,7 @@ kill -15 $RADAR_PID
 slower 5
 
 echo "Parsing results"
-tshark -r radar_$1_$2.pcap -l -nn 2> $DEV | awk ' { print $3 } ' | sort -u > $OUTFILE
+tshark -r radar/radar_$1_$2.pcap -l -nn 2> $DEV | awk ' { print $3 } ' | sort -u > $OUTFILE
 rm -rf radar.pcap
 
 echo "Output is in file $OUTFILE"
