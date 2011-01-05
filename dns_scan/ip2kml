@@ -19,10 +19,9 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 for ip in `cat $1`
 do
     LOC=`geoiplookup -f GeoLiteCity.dat $ip | awk ' BEGIN { FS="," } { print $7 "," $6 } '`
-    echo "Processing $ip -> $LOC"
+    #echo "Processing $ip -> $LOC"
     echo "<Placemark>
-    <name>$ip</name>
-    <description>None</description>
+    <name></name>    
     <Point>
       <coordinates>$LOC,0</coordinates>
     </Point>

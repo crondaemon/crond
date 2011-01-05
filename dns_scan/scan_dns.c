@@ -56,6 +56,8 @@ int main(int argc, char* argv[])
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = ntohs(53);
 
+    printf("Progress: XXX");
+    fflush(NULL);
     for (i = ip_from; i < ip_to; i++) {
         servaddr.sin_addr.s_addr = htonl(i);
         if (sendto(sockfd, dns_payload, dns_payload_size, 0, (struct sockaddr*)&servaddr, 
@@ -69,16 +71,17 @@ int main(int argc, char* argv[])
             }
         }
 
-        #ifndef MAXSPEED        
-        if ((i - ip_from) % ((ip_to - ip_from)/10) == 0)
-            printf("Progress: %u%%\n", (i - ip_from)/((ip_to - ip_from)/10));
+        #ifndef MAXSPEED
+        if ((i - ip_from) % ((ip_to - ip_from)/100) == 1) {
+            printf("%c%c%c%2u%%", 8, 8, 8, 100*(i - ip_from)/((ip_to - ip_from)));
+            fflush(NULL);
+        }
         
         nanosleep(&delay, &rem);
         #endif
-        
     }
     
-    //syslog(LOG_INFO, "Ending scan %s -> %s", argv[1], argv[2]);
+    printf("\n");
     
     return 0;
 }
