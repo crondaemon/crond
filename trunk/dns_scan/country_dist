@@ -16,19 +16,24 @@ if [ -f $2 ];then
 fi
 
 tempfile=/var/tmp/tempgeofile
+tempfile2=/var/tmp/tempgeofile_uniq
 
+echo "Looking up places"
 for ip in `cat $1`
 do
     geoiplookup -f GeoIP.dat $ip >> $tempfile
 done
 
+sort -u $tempfile -o $tempfile2
+
 exec 3<&0
-exec 0<$tempfile
+exec 0<$tempfile2
 while read line
 do
-    echo "processo $line"
-    echo "$line: " `grep "$line" $tempfile | wc -l` >> $2
+    echo "Processing place: $line"
+    echo `grep "$line" $tempfile | wc -l` " : " $line >> $2
 done
 
-sort -u $2 -o $2
 rm -rf $tempfile
+rm -rf $tempfile2
+

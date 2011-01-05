@@ -40,7 +40,7 @@ echo "Starting scanner"
 ./scan_dns $1 $2 1000
 echo "Scanner finished"
 
-echo "Waiting slow scan packets"
+echo -n "Waiting slow scan packets"
 slower 30
 echo -n "Stopping radar"
 kill -15 $RADAR_PID
