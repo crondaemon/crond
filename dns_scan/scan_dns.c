@@ -29,17 +29,13 @@ int main(int argc, char* argv[])
     struct timespec rem;
     
     if (argc < 3) {
-        printf("Usage: %s <ip from> <ip to> [sec delay] [nsec delay]\n", argv[0]);
+        printf("Usage: %s <ip from> <ip to> [nsec delay]\n", argv[0]);
         return 1;
     }
     
+    delay.tv_sec = 0;
     if (argc == 4)
-        delay.tv_sec = atoi(argv[3]);
-    else
-        delay.tv_sec = 0;
-        
-    if (argc == 5)
-        delay.tv_nsec = atoi(argv[4]);
+        delay.tv_nsec = atoi(argv[3]);
     else
         delay.tv_nsec = 0;
 
@@ -56,7 +52,7 @@ int main(int argc, char* argv[])
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = ntohs(53);
 
-    printf("Progress: XXX");
+    printf("Progress: 00%%");
     fflush(NULL);
     for (i = ip_from; i <= ip_to; i++) {
         servaddr.sin_addr.s_addr = htonl(i);
@@ -66,19 +62,17 @@ int main(int argc, char* argv[])
                 case 13:
                     break;
                 default:
-                    printf("Error send datagram to %u: %s\n", i, strerror(errno));
+                    printf("Error sending datagram to %u: %s\n", i, strerror(errno));
                     return 3;
             }
         }
 
-        #ifndef MAXSPEED
         if ((i - ip_from) % ((ip_to - ip_from)/100) == 1) {
             printf("%c%c%c%2u%%", 8, 8, 8, 100*(i - ip_from)/((ip_to - ip_from)));
             fflush(NULL);
         }
         
         nanosleep(&delay, &rem);
-        #endif
     }
     
     printf("\n");
