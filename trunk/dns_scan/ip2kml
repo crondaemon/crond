@@ -20,15 +20,16 @@ for ip in `cat $1`
 do
     LOC=`geoiplookup -f GeoLiteCity.dat $ip | awk ' BEGIN { FS="," } { print $7 "," $6 } '`
     #echo "Processing $ip -> $LOC"
-    echo "<Placemark>
-    <name></name>    
-    <Point>
-      <coordinates>$LOC,0</coordinates>
-    </Point>
-  </Placemark>" >> $2
+    record="<Placemark><name></name><Point><coordinates>$LOC,0</coordinates></Point></Placemark>"
+    grep "$record" $2 >& /dev/null
+    if [ $? != 0 ];then
+    	echo "$record" >> $2
+    fi
 done
 
 echo "</Document>
 </kml>" >> $2
 
-
+KMZ=`echo $2 | sed 's/kml/kmz/g'`
+zip $KMZ $2 &> /dev/null
+echo "Output written to $2 and $KMZ"
